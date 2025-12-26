@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LCS Algorithm Visualizer</title>
+    
+    <script src="html2canvas.min.js"></script>
+    
+    <!-- Link to your existing style.css if you have one -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- CSS specifically for the Sidebar and Header (copied from Aim.html) -->
+    <style>
+        * {
+            margin: 0%;
+            padding: 0%;
+            box-sizing: border-box; /* Added for better sizing */
+        }
+
+        body {
+            font-family: sans-serif;
+        }
+
+        /* --- Header & Sidebar CSS --- */
+        .navbar {
+            background-color: #bd1dbd;
+            width: 100%;
+            height: 70px; /* Fixed height to contain content */
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            position: relative;
+            left: 5%;
+            border-radius: 50%;
+            width: 50px; /* Fixed width for better control */
+            height: 50px;
+        }
+
+        .sidebar {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 180px;
+            position: fixed; /* Changed to fixed so it overlays content */
+            top: 0;
+            left: 0;
+            background-color: #bd1dbd;
+            transition: 0.5s ease;
+            transform: translateX(-180px);
+            z-index: 9999; /* Ensure it is on top of everything */
+        }
+
+        .sidebar ul {
+            /* position: absolute; top: 12%; - Removed to allow flex centering */
+            align-items: center;
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            padding-bottom: 20px;
+            font-size: large;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            font-weight: 500;
+            padding: 5px 0;
+            display: block;
+            text-transform: capitalize;
+            text-decoration: none;
+            transition: 0.2s ease-out;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #e638e6;
+        }
+
+        /* Hide the checkbox */
+        #check {
+            display: none;
+            visibility: hidden;
+            -webkit-appearance: none;
+        }
+
+        .toggle {
+            position: absolute;
+            height: 30px;
+            width: 30px;
+            z-index: 10000; /* Above sidebar */
+            cursor: pointer;
+            top: 20px;
+            left: 15px;
+        }
+
+        .toggle .common {
+            position: absolute;
+            height: 2px;
+            width: 25px;
+            background-color: white;
+            border-radius: 50px;
+            transition: 0.3s ease;
+        }
+
+        .toggle .top { top: 30%; left: 50%; transform: translate(-50%, -50%); }
+        .toggle .middle { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        .toggle .bottom { top: 70%; left: 50%; transform: translate(-50%, -50%); }
+
+        /* Toggle Animations */
+        #check:checked ~ .toggle .top { left: 2px; top: 14px; width: 25px; transform: rotate(45deg); }
+        #check:checked ~ .toggle .bottom { left: 2px; top: 14px; width: 25px; transform: rotate(-45deg); }
+        #check:checked ~ .toggle .middle { opacity: 0; transform: translateX(20px); }
+        #check:checked ~ .sidebar { transform: translateX(0); }
+
+        .heading h2 {
+            position: absolute;
+            top: 20px;
+            left: 100px; /* Adjusted to not overlap logo */
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        /* Title Bar below Header */
+        .nav {
+            background-color: white;
+            padding: 1%;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav h1 {
+            color: #bd1dbd;
+        }
+
+        /* --- Your Original Project Styles Support --- */
+        main {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        /* Ensure panels look good if not defined in style.css */
+        .panel {
+            background-color: white;
+            box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+            padding: 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- SVG Definitions for Arrowheads -->
+    <svg width="0" height="0" style="position:absolute;z-index:-1;">
+        <defs>
+            <marker id="arrow-head" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" class="arrow-head-fill"></path>
+            </marker>
+             <marker id="arrow-head-trace" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" class="arrow-head-trace-fill"></path>
+            </marker>
+        </defs>
+    </svg>
+
+    <header>
+        <nav>
+            <div class="navbar">
+                <!-- Checkbox for Sidebar Toggle -->
+                <input type="checkbox" id="check">
+                <label for="check" class="toggle">
+                    <span class="top common"></span>
+                    <span class="middle common"></span>
+                    <span class="bottom common"></span>
+                </label>
+
+                <!-- Sidebar Menu -->
+                <div class="sidebar">
+                    <ul>
+                        <li><a href="home.html">Home</a></li>
+                        <li><a href="introduction.html">Introduction</a></li>
+                        <li><a href="objective.html">Objective</a></li>
+                        <li><a href="Aim.html">Aim</a></li>
+                        <li><a href="overview.html">Overview</a></li>
+                        <li><a href="pretest.html">Pretest</a></li>
+                        <li><a href="recap.html">Recap</a></li>
+                        <li><a href="simulation.html">Simulation</a></li>
+                    </ul>
+                </div>
+
+                <!-- Logo -->
+                <div class="logo">
+                    <img src="logo.jpg" alt="">
+                </div>
+
+                <!-- Header Title -->
+                <div class="heading">
+                    <h2>Mahatma Gandhi Mission's College of Engineering, Nanded</h2>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Specific Title (styled like Aim.html) -->
+    <div class="nav">
+        <h1>LCS Algorithm Visualizer</h1>
+        <p>An interactive tool for learning the Longest Common Subsequence algorithm.</p>
+    </div>
+
+    <!-- YOUR ORIGINAL PROJECT CONTENT STARTS HERE -->
+    <main>
+        <div id="controls-panel" class="panel">
+            <div class="control-group">
+                <h3>Strings</h3>
+                <label for="s1">String 1:</label>
+                <input type="text" id="s1" value="ABCBDAB">
+                <label for="s2">String 2:</label>
+                <input type="text" id="s2" value="BDCABA">
+                <label for="presets">Presets:</label>
+                <select id="presets">
+                    <option value="ABCBDAB,BDCABA">Classic (ABCBDAB, BDCABA)</option>
+                    <option value="XMJYAUZ,MZJAWXU">Another Classic (XMJYAUZ, MZJAWXU)</option>
+                    <option value="AGGTAB,GXTXAYB">GeeksForGeeks (AGGTAB, GXTXAYB)</option>
+                    <option value=",">Empty Strings</option>
+                    <option value="A,">One Empty</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <h3>Algorithm & Settings</h3>
+                <div>
+                    <label for="algorithm">Mode:</label>
+                    <select id="algorithm">
+                        <option value="bottom-up" selected>Bottom-Up</option>
+                    </select>
+                    <label><input type="checkbox" id="case-sensitive"> Case Sensitive</label>
+                    <label><input type="checkbox" id="lcs-substring-mode"> Longest Common Substring</label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <h3>Controls</h3>
+                <div>
+                    <button id="start-btn" class="primary">Start</button>
+                    <button id="reset-btn" disabled>Reset</button>
+                </div>
+                <div id="playback-controls" style="display: none;">
+                    <button id="prev-btn">&laquo; Prev</button>
+                    <button id="play-pause-btn">Play</button>
+                    <button id="next-btn">Next &raquo;</button>
+                    <label for="speed-slider">Speed:</label>
+                    <input type="range" id="speed-slider" min="50" max="2000" value="500" step="50">
+                </div>
+                <div>
+                    <span id="step-counter">Step: 0 / 0</span>
+                    <select id="jump-to-step" style="display: none;"></select>
+                </div>
+            </div>
+        </div>
+
+        <div id="visual-panel" class="panel">
+            <div id="matrix-grid-container">
+                <table id="matrix-grid"></table>
+            </div>
+            <div id="final-lcs-display"></div>
+        </div>
+    </main>
+    <!-- YOUR ORIGINAL PROJECT CONTENT ENDS HERE -->
+
+    <script src="script.js" defer></script>
+</body>
+</html>
