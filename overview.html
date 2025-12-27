@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overview</title>
+
+    <style>
+        * {
+            margin: 0%;
+            padding: 0%;
+        }
+
+        .navbar {
+            background-color: #bd1dbd;
+        }
+
+        .logo img {
+            position: relative;
+            left: 5%;
+            border-radius: 50%;
+            width: 4%;
+            /* margin-left: 5%; */
+        }
+
+        .sidebar {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 180px;
+            position: absolute;
+            background-color: #bd1dbd;
+            transition: 0.5s ease;
+            transform: translateX(-180px);
+        }
+
+        .sidebar ul {
+            position: absolute;
+            top: 12%;
+            align-items: center;
+        }
+
+        .sidebar ul li {
+            list-style: none;
+            padding-bottom: 20%;
+            font-size: large;
+        }
+
+        .sidebar ul li:hover {}
+
+        .sidebar ul li a {
+            color: white;
+            font-weight: 500;
+            padding: 5px 0;
+            display: block;
+            text-transform: capitalize;
+            text-decoration: none;
+            transition: 0.2s ease-out;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #e638e6;
+        }
+
+        input {
+            display: none;
+            visibility: hidden;
+            -webkit-appearance: none;
+        }
+
+        .toggle {
+            position: absolute;
+            height: 30px;
+            width: 30px;
+            z-index: 1;
+            cursor: pointer;
+            /* background-color: red; */
+            top: 2.5%;
+            left: 13px;
+        }
+
+        .toggle .common {
+            position: absolute;
+            height: 2px;
+            width: 25px;
+            background-color: white;
+            border-radius: 50px;
+            transition: 0.3s ease;
+        }
+
+        .toggle .top {
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .toggle .middle {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .toggle .bottom {
+            top: 70%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        input:checked~.toggle .top {
+            left: 2px;
+            top: 14px;
+            width: 25px;
+            transform: rotate(45deg);
+        }
+
+        input:checked~.toggle .bottom {
+            left: 2px;
+            top: 14px;
+            width: 25px;
+            transform: rotate(-45deg);
+        }
+
+        input:checked~.toggle .middle {
+            opacity: 0;
+            transform: translateX(20px);
+        }
+
+        input:checked~.sidebar {
+            transform: translateX(0);
+        }
+
+        .homepage img {
+            width: 100%;
+        }
+
+        .heading h2 {
+            position: absolute;
+            top: 3%;
+            left: 10%;
+            color: white;
+        }
+
+        .body_page {
+            background-color: white;
+            box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+        }
+
+        .main h2 {
+            text-align: center;
+        }
+
+        .video-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main h2 {
+            margin-left: 2%;
+            text-decoration: underline;
+        }
+
+        p {
+            margin-left: 5%;
+            font-size: large;
+        }
+
+        li {
+            margin-left: 5%;
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .heading_same h2{
+            margin-left: 5%;
+            text-decoration: underline;
+        }
+        .video-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;   /* optional */
+    margin: auto;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+
+            <div class="navbar">
+
+                <input type="checkbox" id="check">
+                <label for="check" class="toggle">
+                    <span class="top common"></span>
+                    <span class="middle common"></span>
+                    <span class="bottom common"></span>
+                </label>
+
+
+
+                <div class="sidebar">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="introduction.html">Introduction</a></li>
+                        <li><a href="objective.html">Objective</a></li>
+                        <li><a href="Aim.html">Aim</a></li>
+                        <li><a href="overview.html">Overview</a></li>
+                        <li><a href="pretest.html">Pretest</a></li>
+                        <li><a href="recap.html">Recap</a></li>
+                        <li><a href="simulation.html">Simulation</a></li>
+                    </ul>
+                </div>
+
+
+                <div class="logo">
+                    <img src="logo.jpg" alt="">
+                </div>
+
+                <div class="heading">
+                    <h2>Mahatma Gandhi Mission's College of Engineering, Nanded</h2>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <div class="body_page">
+
+        <br>
+        <div class="main">
+            <h2>LONGEST Common Subsequence</h2>
+        </div>
+
+        <div class="video-container">
+            <iframe 
+                src="https://www.youtube.com/embed/sSno9rV8Rhg"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <br>
+        <div class="heading_same">
+            <h2>Prerequisites of the Experiment</h2>
+        </div>
+        <br>
+
+       <p>This experiment requires you to have basic knowledge about :</p>
+
+<ul>
+    <li><a href="https://en.wikipedia.org/wiki/Longest_common_subsequence_problem">Longest Common Subsequence (LCS)</a></li>
+    <!-- <li><a href="#"></a></li> -->
+</ul>
+
+<p>And above all, a curiosity to learn and explore!</p><br>
+
+<div class="heading_same"><h2>Overview of the Experiment</h2></div><br>
+
+<p>The aim of this experiment is to understand the Longest Common Subsequence (LCS) problem and explore its algorithmic approaches, time complexity, and space complexity.</p>
+<p>The experiment features a series of modules with video lectures, interactive demonstrations, simulations, hands-on practice exercises, and quizzes for self-analysis.</p>
+
+
+    </div>
+
+</body>
+
+</html>

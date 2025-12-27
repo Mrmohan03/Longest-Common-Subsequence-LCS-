@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>LCS – Random MCQs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .navbar {
+            background-color: #bd1dbd;
+            position: relative;
+            min-height: 70px;
+        }
+
+        .logo img {
+            position: relative;
+            left: 5%;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            object-fit: cover;
+            margin-top: 10px;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 180px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            background-color: #bd1dbd;
+            transition: 0.5s ease;
+            transform: translateX(-180px);
+            z-index: 100;
+        }
+
+        .sidebar ul {
+            position: absolute;
+            top: 12%;
+            width: 100%;
+            padding-left: 0;
+            text-align: center;
+        }
+
+        .sidebar ul li {
+            list-style: none;
+            padding: 18px 0;
+            font-size: 16px;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            font-weight: 500;
+            display: block;
+            text-transform: capitalize;
+            text-decoration: none;
+            transition: 0.2s ease-out;
+            padding: 6px 8px;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #e638e6;
+            border-radius: 6px;
+        }
+
+        /* Only hide the sidebar toggle checkbox — keep other inputs visible */
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        .toggle {
+            position: absolute;
+            height: 30px;
+            width: 30px;
+            z-index: 200;
+            cursor: pointer;
+            top: 18px;
+            left: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .toggle .common {
+            position: absolute;
+            height: 2px;
+            width: 25px;
+            background-color: white;
+            border-radius: 50px;
+            transition: 0.3s ease;
+        }
+
+        .toggle .top {
+            top: 8px;
+        }
+
+        .toggle .middle {
+            top: 14px;
+        }
+
+        .toggle .bottom {
+            top: 20px;
+        }
+
+        /* When the hidden checkbox is checked, show sidebar and animate toggle */
+        input[type="checkbox"]:checked~.toggle .top {
+            left: 2px;
+            top: 14px;
+            transform: rotate(45deg);
+        }
+
+        input[type="checkbox"]:checked~.toggle .bottom {
+            left: 2px;
+            top: 14px;
+            transform: rotate(-45deg);
+        }
+
+        input[type="checkbox"]:checked~.toggle .middle {
+            opacity: 0;
+            transform: translateX(20px);
+        }
+
+        input[type="checkbox"]:checked~.sidebar {
+            transform: translateX(0);
+        }
+
+        .heading h2 {
+            position: absolute;
+            top: 18px;
+            left: 90px;
+            color: white;
+            font-size: 18px;
+            white-space: nowrap;
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 800px;
+            margin: 40px auto;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        h2 {
+            color: #1f3c88;
+            margin-bottom: 6px;
+        }
+
+        .mcq {
+            background: #eef2f7;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 5px solid #2563eb;
+            border-radius: 5px;
+        }
+
+        .mcq label {
+            cursor: pointer;
+            display: inline-block;
+            margin: 6px 0;
+        }
+
+        /* Make radio inputs visually obvious (optional) */
+        input[type="radio"] {
+            margin-right: 8px;
+            transform: translateY(1px);
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #1e40af;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+            color: green;
+            font-weight: bold;
+        }
+
+        /* Responsive */
+        @media (max-width: 860px) {
+            .container {
+                width: calc(100% - 40px);
+                margin: 20px;
+            }
+
+            .heading h2 {
+                left: 70px;
+                top: 14px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+
+            <div class="navbar">
+
+                <!-- hidden checkbox that controls the sidebar -->
+                <input type="checkbox" id="check">
+                <label for="check" class="toggle" aria-hidden="true">
+                    <span class="top common"></span>
+                    <span class="middle common"></span>
+                    <span class="bottom common"></span>
+                </label>
+
+                <div class="sidebar" aria-hidden="true">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="introduction.html">Introduction</a></li>
+                        <li><a href="objective.html">Objective</a></li>
+                        <li><a href="Aim.html">Aim</a></li>
+                        <li><a href="overview.html">Overview</a></li>
+                        <li><a href="pretest.html">Pretest</a></li>
+                        <li><a href="recap.html">Recap</a></li>
+                        <li><a href="simulation.html">Simulation</a></li>
+                    </ul>
+                </div>
+
+                <div class="logo">
+                    <img src="logo.jpg" alt="Logo">
+                </div>
+
+                <div class="heading">
+                    <h2>Mahatma Gandhi Mission's College of Engineering, Nanded</h2>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>LCS – MCQ Test</h2>
+        <p>Refresh the page to get <b>10 new MCQs</b> every time.</p>
+
+        <div id="mcqBox"></div>
+
+        <button onclick="checkScore()">Submit Answers</button>
+
+        <div id="result" class="result" role="status" aria-live="polite"></div>
+    </div>
+
+    <script>
+        // -------------------------------
+        // 1. MCQ Question Bank (40 MCQs)
+        // -------------------------------
+        const mcqList = [
+            { q: "LCS stands for:", options: ["Longest Common Subsequence", "Longest Common Substring", "LONGEST Common Sequence", "Linear Character Subsequence"], answer: 0 },
+            { q: "LCS is widely used in:", options: ["Image processing", "Text comparison", "Sorting", "Routing"], answer: 1 },
+            { q: "LCS problem is solved efficiently using:", options: ["Greedy Algorithm", "Dynamic Programming", "Divide & Conquer only", "Backtracking only"], answer: 1 },
+            { q: "LCS compares:", options: ["Two strings", "Two numbers", "Graphs", "Arrays only"], answer: 0 },
+            { q: "Which is NOT a property used in LCS?", options: ["Optimal substructure", "Overlapping subproblems", "NP-hard reduction", "Dynamic programming"], answer: 2 },
+            { q: "If characters match in LCS DP, we:", options: ["Add 1 and move diagonally", "Move left", "Move up", "Reset to zero"], answer: 0 },
+            { q: "LCS time complexity using DP is:", options: ["O(n)", "O(n+m)", "O(n*m)", "O(log n)"], answer: 2 },
+            { q: "Which representation is used for LCS DP?", options: ["2D matrix", "Binary heap", "Graph", "Linked list"], answer: 0 },
+            { q: "LCS length of ('ABC', 'ABC') is:", options: ["0", "1", "2", "3"], answer: 3 },
+            { q: "LCS of ('ABC', 'AC') is:", options: ["AC", "A", "ABC", "None"], answer: 0 },
+            { q: "Recursive LCS without memoization is:", options: ["Fast", "Exponential", "Constant time", "Linear"], answer: 1 },
+            { q: "Which is TRUE for LCS?", options: ["Subsequence is contiguous", "Substring is not contiguous", "Subsequence is not necessarily contiguous", "All are false"], answer: 2 },
+            { q: "DP table used in LCS is of size:", options: ["n x 1", "1 x m", "(n+1) x (m+1)", "n x m x 2"], answer: 2 },
+            { q: "LCS helps in:", options: ["DNA sequence analysis", "OS process scheduling", "Network routing", "Encryption"], answer: 0 },
+            { q: "LCS length of ('AXYT', 'AYZX'):", options: ["0", "1", "2", "3"], answer: 2 },
+            { q: "Which approach builds solution bottom-up?", options: ["Recursion", "Memoization", "Dynamic Programming", "Heap sort"], answer: 2 },
+            { q: "LCS of ('ABCBDAB', 'BDCABA') length is:", options: ["2", "3", "4", "5"], answer: 2 },
+            { q: "LCS belongs to which class of problems?", options: ["Optimization", "Approximation", "Greedy", "Random"], answer: 0 },
+            { q: "If characters don’t match in DP:", options: ["Take max(top, left)", "Take diagonal", "Assign 0", "Skip all"], answer: 0 },
+            { q: "Construction of actual LCS requires:", options: ["Re-traverse DP table", "Hashing", "Sorting", "Trees"], answer: 0 },
+            // add more questions to reach 40 if desired
+            { q: "LCS uses which of the following for storing subresults?", options: ["Memo table", "Stack", "Queue", "Set"], answer: 0 },
+            { q: "Shortest edit script vs LCS: LCS helps in finding", options: ["Minimal edits", "Exact sorts", "Longest match subsequence", "Graph coloring"], answer: 2 },
+            { q: "When building DP for strings of length n and m, indices are often run from:", options: ["0..n-1 and 0..m-1", "1..n and 1..m", "Only last char", "None"], answer: 1 },
+            { q: "Space-optimized LCS attempts to reduce:", options: ["Time", "Space", "Accuracy", "Input size"], answer: 1 },
+            { q: "LCS can return multiple valid sequences when:", options: ["All characters different", "Multiple tie paths exist", "Strings equal", "Strings empty"], answer: 1 },
+            { q: "Longest Common Substring differs from LCS because:", options: ["Needs contiguity", "Requires DP", "Uses hashes only", "Is NP-hard"], answer: 0 },
+            { q: "For very long strings, LCS DP may be heavy because:", options: ["Quadratic time", "Linear time", "Constant time", "Logarithmic time"], answer: 0 },
+            { q: "Which technique speeds up certain LCS variants using bitsets?", options: ["Bit-parallelism", "Greedy", "Kruskal", "Dijkstra"], answer: 0 },
+            { q: "Base cases in LCS DP table are usually:", options: ["Zeros for first row/col", "Random values", "Infinity", "Negatives"], answer: 0 },
+            { q: "LCS result for one empty string and one non-empty string is:", options: ["Length 0", "Length 1", "Length n", "Undefined"], answer: 0 },
+            { q: "Which of the following algorithms is closest to LCS conceptually?", options: ["Edit distance (Levenshtein)", "Dijkstra", "KMP", "Prim"], answer: 0 },
+            { q: "Top-down LCS means:", options: ["Memoized recursion", "Bottom-up loop", "Greedy", "Bitset only"], answer: 0 },
+            { q: "When reconstructing LCS, if dp[i][j] == dp[i-1][j], we typically:", options: ["Move up", "Move left", "Add char", "Stop"], answer: 0 },
+            { q: "A typical small optimization reduces memory to O(min(n,m)) by:", options: ["Only storing two rows", "Storing whole table", "Using graphs", "Using recursion"], answer: 0 },
+            { q: "LCS can be used in diff tools to:", options: ["Find common lines", "Encrypt files", "Sort lines", "Detect viruses"], answer: 0 }
+        ];
+
+        // -------------------------------
+        // 2. Shuffle & Pick 10 Random MCQs
+        // -------------------------------
+        function shuffle(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+        }
+
+        // Create a shallow copy before shuffling so original bank remains intact
+        const bank = mcqList.slice();
+        shuffle(bank);
+        let selected = bank.slice(0, 10);
+
+        // -------------------------------
+        // 3. Display MCQs
+        // -------------------------------
+        const mcqBox = document.getElementById("mcqBox");
+
+        selected.forEach((item, index) => {
+            const block = document.createElement("div");
+            block.className = "mcq";
+
+            // Create a unique name for each question so radios are grouped
+            const qName = `q${index}`;
+
+            // Build options with radio inputs (visible and clickable)
+            block.innerHTML = `
+                <b>Q${index + 1}:</b> ${item.q} <br>
+                ${item.options.map((opt, i) =>
+                    `<label><input type="radio" name="${qName}" value="${i}"> ${opt}</label><br>`
+                ).join("")}
+            `;
+
+            mcqBox.appendChild(block);
+        });
+
+        // -------------------------------
+        // 4. Check Score
+        // -------------------------------
+        function checkScore() {
+            let score = 0;
+
+            selected.forEach((item, index) => {
+                const marked = document.querySelector(`input[name="q${index}"]:checked`);
+                if (marked && parseInt(marked.value, 10) === item.answer) {
+                    score++;
+                }
+            });
+
+            document.getElementById("result").textContent = `Your Score: ${score} / 10`;
+        }
+    </script>
+
+</body>
+
+</html>
